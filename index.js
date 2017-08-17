@@ -11,6 +11,10 @@ io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
+  // dat su kien bien typing
+  socket.on('typing-show',function(type){
+    io.emit('typing-show', type);
+  });
 });
 
 http.listen(3000, function(){

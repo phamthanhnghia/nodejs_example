@@ -20,20 +20,39 @@
 
 
       $(function () {
-
+        $('#typing').hide();
         var socket = io();
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
+          //socket.emit()
           return false;
         });
 
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
-          //console.log(msg);
         });
+        // bat su kien typing
+        socket.on('typing-show',function(type){
+          $('#typing').show();
+          setTimeout(function(){
+            $('#typing').hide();
+          },1000);
+        });
+        //gui su kien typing
+        $('#m').keypress(function(e){
+          var type = true;
+          socket.emit('typing-show',type);
+        });
+        // $('#m').keypress(function(e){
+        //   $('#typing').show();
+        //   setTimeout(function(){
+        //     $('#typing').hide();
+        //   },1000);
+        // });
+
         //$('#typing').hide();
-        
+
         // $('#m').keypress(function(e){
         //   $('#typing').show();
         //   setTimeout(function(){
