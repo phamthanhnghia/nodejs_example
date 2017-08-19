@@ -16,7 +16,7 @@ io.on('connection', function(socket){
     io.emit('typing-show', type);
   });
 });
-
+//
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
